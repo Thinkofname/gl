@@ -3732,8 +3732,8 @@ package gl
 // static void  glowVertexAttribIFormat(GPVERTEXATTRIBIFORMAT fnptr, GLuint  attribindex, GLint  size, GLenum  type, GLuint  relativeoffset) {
 //   (*fnptr)(attribindex, size, type, relativeoffset);
 // }
-// static void  glowVertexAttribIPointer(GPVERTEXATTRIBIPOINTER fnptr, GLuint  index, GLint  size, GLenum  type, GLsizei  stride, const void * pointer) {
-//   (*fnptr)(index, size, type, stride, pointer);
+// static void  glowVertexAttribIPointer(GPVERTEXATTRIBIPOINTER fnptr, GLuint  index, GLint  size, GLenum  type, GLsizei  stride, intptr_t pointer) {
+//   (*fnptr)(index, size, type, stride, (void*)pointer);
 // }
 // static void  glowVertexAttribL1d(GPVERTEXATTRIBL1D fnptr, GLuint  index, GLdouble  x) {
 //   (*fnptr)(index, x);
@@ -3795,8 +3795,8 @@ package gl
 // static void  glowVertexAttribP4uiv(GPVERTEXATTRIBP4UIV fnptr, GLuint  index, GLenum  type, GLboolean  normalized, const GLuint * value) {
 //   (*fnptr)(index, type, normalized, value);
 // }
-// static void  glowVertexAttribPointer(GPVERTEXATTRIBPOINTER fnptr, GLuint  index, GLint  size, GLenum  type, GLboolean  normalized, GLsizei  stride, const void * pointer) {
-//   (*fnptr)(index, size, type, normalized, stride, pointer);
+// static void  glowVertexAttribPointer(GPVERTEXATTRIBPOINTER fnptr, GLuint  index, GLint  size, GLenum  type, GLboolean  normalized, GLsizei  stride, intptr_t pointer) {
+//   (*fnptr)(index, size, type, normalized, stride, (void*)pointer);
 // }
 // static void  glowVertexBindingDivisor(GPVERTEXBINDINGDIVISOR fnptr, GLuint  bindingindex, GLuint  divisor) {
 //   (*fnptr)(bindingindex, divisor);
@@ -9962,8 +9962,8 @@ func VertexAttribI4usv(index uint32, v *uint16) {
 func VertexAttribIFormat(attribindex uint32, size int32, xtype uint32, relativeoffset uint32) {
 	C.glowVertexAttribIFormat(gpVertexAttribIFormat, (C.GLuint)(attribindex), (C.GLint)(size), (C.GLenum)(xtype), (C.GLuint)(relativeoffset))
 }
-func VertexAttribIPointer(index uint32, size int32, xtype uint32, stride int32, pointer unsafe.Pointer) {
-	C.glowVertexAttribIPointer(gpVertexAttribIPointer, (C.GLuint)(index), (C.GLint)(size), (C.GLenum)(xtype), (C.GLsizei)(stride), pointer)
+func VertexAttribIPointer(index uint32, size int32, xtype uint32, stride int32, pointer uintptr) {
+	C.glowVertexAttribIPointer(gpVertexAttribIPointer, (C.GLuint)(index), (C.GLint)(size), (C.GLenum)(xtype), (C.GLsizei)(stride), (C.intptr_t)(pointer))
 }
 func VertexAttribL1d(index uint32, x float64) {
 	C.glowVertexAttribL1d(gpVertexAttribL1d, (C.GLuint)(index), (C.GLdouble)(x))
@@ -10027,8 +10027,8 @@ func VertexAttribP4uiv(index uint32, xtype uint32, normalized bool, value *uint3
 }
 
 // define an array of generic vertex attribute data
-func VertexAttribPointer(index uint32, size int32, xtype uint32, normalized bool, stride int32, pointer unsafe.Pointer) {
-	C.glowVertexAttribPointer(gpVertexAttribPointer, (C.GLuint)(index), (C.GLint)(size), (C.GLenum)(xtype), (C.GLboolean)(boolToInt(normalized)), (C.GLsizei)(stride), pointer)
+func VertexAttribPointer(index uint32, size int32, xtype uint32, normalized bool, stride int32, pointer uintptr) {
+	C.glowVertexAttribPointer(gpVertexAttribPointer, (C.GLuint)(index), (C.GLint)(size), (C.GLenum)(xtype), (C.GLboolean)(boolToInt(normalized)), (C.GLsizei)(stride), (C.intptr_t)(pointer))
 }
 
 // modify the rate at which generic vertex attributes     advance
