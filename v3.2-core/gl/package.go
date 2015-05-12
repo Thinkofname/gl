@@ -1581,8 +1581,8 @@ package gl
 // static void  glowDrawBuffers(GPDRAWBUFFERS fnptr, GLsizei  n, const GLenum * bufs) {
 //   (*fnptr)(n, bufs);
 // }
-// static void  glowDrawElements(GPDRAWELEMENTS fnptr, GLenum  mode, GLsizei  count, GLenum  type, const void * indices) {
-//   (*fnptr)(mode, count, type, indices);
+// static void  glowDrawElements(GPDRAWELEMENTS fnptr, GLenum  mode, GLsizei  count, GLenum  type, intptr_t indices) {
+//   (*fnptr)(mode, count, type, (void*)indices);
 // }
 // static void  glowDrawElementsBaseVertex(GPDRAWELEMENTSBASEVERTEX fnptr, GLenum  mode, GLsizei  count, GLenum  type, const void * indices, GLint  basevertex) {
 //   (*fnptr)(mode, count, type, indices, basevertex);
@@ -7171,8 +7171,8 @@ func DrawBuffers(n int32, bufs *uint32) {
 }
 
 // render primitives from array data
-func DrawElements(mode uint32, count int32, xtype uint32, indices unsafe.Pointer) {
-	C.glowDrawElements(gpDrawElements, (C.GLenum)(mode), (C.GLsizei)(count), (C.GLenum)(xtype), indices)
+func DrawElements(mode uint32, count int32, xtype uint32, indices uintptr) {
+	C.glowDrawElements(gpDrawElements, (C.GLenum)(mode), (C.GLsizei)(count), (C.GLenum)(xtype), (C.intptr_t)(indices))
 }
 
 // render primitives from array data with a per-element offset
