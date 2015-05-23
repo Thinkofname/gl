@@ -2481,8 +2481,8 @@ package gl
 // static void  glowMultiDrawArraysIndirectCountARB(GPMULTIDRAWARRAYSINDIRECTCOUNTARB fnptr, GLenum  mode, GLintptr  indirect, GLintptr  drawcount, GLsizei  maxdrawcount, GLsizei  stride) {
 //   (*fnptr)(mode, indirect, drawcount, maxdrawcount, stride);
 // }
-// static void  glowMultiDrawElements(GPMULTIDRAWELEMENTS fnptr, GLenum  mode, const GLsizei * count, GLenum  type, const void *const* indices, GLsizei  drawcount) {
-//   (*fnptr)(mode, count, type, indices, drawcount);
+// static void  glowMultiDrawElements(GPMULTIDRAWELEMENTS fnptr, GLenum  mode, const GLsizei * count, GLenum  type, const intptr_t * indices, GLsizei  drawcount) {
+//   (*fnptr)(mode, count, type, (const void *const*) indices, drawcount);
 // }
 // static void  glowMultiDrawElementsBaseVertex(GPMULTIDRAWELEMENTSBASEVERTEX fnptr, GLenum  mode, const GLsizei * count, GLenum  type, const void *const* indices, GLsizei  drawcount, const GLint * basevertex) {
 //   (*fnptr)(mode, count, type, indices, drawcount, basevertex);
@@ -8397,8 +8397,8 @@ func MultiDrawArraysIndirectCountARB(mode uint32, indirect int, drawcount int, m
 }
 
 // render multiple sets of primitives by specifying indices of array data elements
-func MultiDrawElements(mode uint32, count *int32, xtype uint32, indices *unsafe.Pointer, drawcount int32) {
-	C.glowMultiDrawElements(gpMultiDrawElements, (C.GLenum)(mode), (*C.GLsizei)(unsafe.Pointer(count)), (C.GLenum)(xtype), indices, (C.GLsizei)(drawcount))
+func MultiDrawElements(mode uint32, count *int32, xtype uint32, indices *uintptr, drawcount int32) {
+	C.glowMultiDrawElements(gpMultiDrawElements, (C.GLenum)(mode), (*C.GLsizei)(unsafe.Pointer(count)), (C.GLenum)(xtype), (*C.intptr_t)(unsafe.Pointer(indices)), (C.GLsizei)(drawcount))
 }
 
 // render multiple sets of primitives by specifying indices of array data elements and an index to apply to each index
